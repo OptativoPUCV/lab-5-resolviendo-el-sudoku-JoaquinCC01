@@ -33,7 +33,7 @@ Node* read_file (char* file_name){
   return n;
 }
 
-void print_node(Node* n){
+void print_node(Node* n){ 
     int i,j;
     for(i=0;i<9;i++){
        for(j=0;j<9;j++)
@@ -44,13 +44,62 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
-
-    return 1;
+  int i,j,k;
+  int arr[10];
+  for (i=0;i<9;i++){
+    memset(arr,0,sizeof(arr));
+    for (j=0;j<9;j++){
+      k = n->sudo[i][j];
+      if(k){
+        if(arr[k]) return 0;
+        arr[k] = 1;
+      }
+        
+      }
+    }
+  for (j=0;j<9;j++){
+    memset(arr,0,sizeof(arr));
+    for (i=0;i<9;i++){
+      k = n->sudo[i][j];
+      if(k){
+        if(arr[k]) return 0;
+        arr[k] = 1;
+      }  
+      }
+    }
+  for (int bi = 0; bi < 9; bi += 3) { // bi y bj nos dicen los subbloques de 3x3
+    for (int bj = 0; bj < 9; bj += 3) {
+        memset(arr, 0, sizeof(arr));
+        for (int di = 0; di < 3; di++) { // di filas y dj columnas
+            for (int dj = 0; dj < 3; dj++) {
+                int k = n->sudo[bi + di][bj + dj];
+                if (k) {
+                    if (arr[k]) return 0;
+                    arr[k] = 1;
+                }
+            }
+        }
+    }
+}
+  return 1;
 }
 
 
 List* get_adj_nodes(Node* n){
     List* list=createList();
+    for(int i = 0; i<9;i++){
+      for(int j = 0; j<9;j++){
+        if(n->sudo[i][j] == 0){
+          for (int k = 1; k <= 9; k++){
+            n->sudo[i][j] = k;
+            if(is_valid(n)){
+              Node* new = copy(n);
+              pushBack(list, new);
+            }
+          }
+        }
+      }
+    }
     return list;
 }
 
