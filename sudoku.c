@@ -127,7 +127,8 @@ Node* DFS(Node* initial, int* cont){
       return n;
     }
     List* adj = get_adj_nodes(n);
-    for (int i=0;i<get_size(adj);i++){
+    int size = get_size(adj);
+    for (int i=0;i<size;i++){
       Node* new = (Node*)front(adj);
       push(stack, new);
       popFront(adj);
