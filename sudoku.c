@@ -97,6 +97,8 @@ List* get_adj_nodes(Node* n){
               pushBack(list, new);
             }
           }
+          n->sudo[i][j] = 0;
+          return list;
         }
       }
     }
@@ -121,7 +123,7 @@ Node* DFS(Node* initial, int* cont){
     Node* n = top(stack);
     pop(stack);
     (*cont)++;
-    if(is_valid(n)&& is_final(n)){
+    if(is_valid(n) && is_final(n)){
       return n;
     }
     List* adj = get_adj_nodes(n);
