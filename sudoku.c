@@ -121,7 +121,7 @@ Node* DFS(Node* initial, int* cont){
     Node* n = top(stack);
     pop(stack);
     (*cont)++;
-    if(is_valid(n)){
+    if(is_valid(n)&& is_final(n)){
       return n;
     }
     List* adj = get_adj_nodes(n);
