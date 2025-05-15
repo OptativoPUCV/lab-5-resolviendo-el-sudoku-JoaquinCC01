@@ -127,7 +127,6 @@ Node* DFS(Node* initial, int* cont){
       return n;
     }
     List* adj = get_adj_nodes(n);
-    printf("  -> hijos generados: %d\n", get_size(adj));
     for (int i=0;i<get_size(adj);i++){
       Node* new = (Node*)front(adj);
       push(stack, new);
